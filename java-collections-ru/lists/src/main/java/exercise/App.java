@@ -7,8 +7,8 @@ import java.util.List;
 // BEGIN
 public class App {
     public static boolean scrabble(String symbols, String word) {
-        List<String> symbolsList = new ArrayList<>(Array.asList(symbols.toLowerCase().split("")));
-        List<String> wordList = new ArrayList<>(Array.asList(word.toLowerCase().split("")));
+        List<String> symbolsList = new ArrayList<>(Arrays.asList(symbols.toLowerCase().split("")));
+        List<String> wordList = new ArrayList<>(Arrays.asList(word.toLowerCase().split("")));
         if (symbolsList.size() < wordList.size()) {
             return false;
         }
