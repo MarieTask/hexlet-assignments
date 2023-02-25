@@ -12,11 +12,13 @@ public class App {
         if (symbolsList.size() < wordList.size()) {
             return false;
         }
+        var j = 0;
         for (var i = 0; i < symbolsList.size(); i++) {
-            if (symbolsList.contains(wordList.get(i))) {
-                symbolsList.remove(wordList.get(i));
-            } else {
+            if (!symbolsList.contains(wordList.get(j))) {
                 return false;
+            } else {
+                symbolsList.remove(wordList.get(j));
+                j++;
             }
         }
         return true;
