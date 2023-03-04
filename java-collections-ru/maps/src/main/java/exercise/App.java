@@ -34,7 +34,7 @@ public class App {
             result.append(": ");
             result.append(words.getValue());
         }
-        result.append("}");
+        result.append("\n}");
         return result.toString();
     }
 }
