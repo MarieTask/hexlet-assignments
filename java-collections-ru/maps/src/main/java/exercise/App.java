@@ -19,7 +19,7 @@ public class App {
 
         for (var i = 0; i < value.size(); i++) {
             Integer countOfWords = Collections.frequency(value, value.get(i));
-            wordsCount.put(value.get(i), countOfWords)
+            wordsCount.put(value.get(i), countOfWords);
         }
         return wordsCount;
     }
