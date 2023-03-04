@@ -10,10 +10,10 @@ import java.util.Collections;
 public class App {
     public static Map<String, Integer> getWordCount(String sentence) {
         Map<String, Integer> wordsCount = new HashMap<>();
- //       if (sentence.equals("")) {
- //           return wordsCount;
- //       }
-        String[] splittedSentence = sentence.toLowerCase().split(" ");
+        if (sentence.equals("")) {
+            return wordsCount;
+        }
+        String[] splittedSentence = sentence.split(" ");
         List<String> value = new ArrayList<>();
         Collections.addAll(value, splittedSentence);
 
@@ -23,7 +23,6 @@ public class App {
         }
         return wordsCount;
     }
-//    public static Integer getWordCountInSentence(List<String> arrayList,)
     public static String toString(Map<String, Integer> wordsCount) {
         if (wordsCount.isEmpty()) {
             return "{}";
@@ -31,9 +30,9 @@ public class App {
         var result = new StringBuilder("{");
         for (Map.Entry<String, Integer> words: wordsCount.entrySet()) {
             result.append("/n  ");
-            result.append(wordsCount.keySet());
+            result.append(words.getKey());
             result.append(": ");
-            result.append(wordsCount.values());
+            result.append(words.getValue());
         }
         result.append("}");
         return result.toString();
