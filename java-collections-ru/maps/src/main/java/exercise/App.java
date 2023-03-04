@@ -29,7 +29,7 @@ public class App {
         }
         var result = new StringBuilder("{");
         for (Map.Entry<String, Integer> words: wordsCount.entrySet()) {
-            result.append("/n  ");
+            result.append("\n  ");
             result.append(words.getKey());
             result.append(": ");
             result.append(words.getValue());
