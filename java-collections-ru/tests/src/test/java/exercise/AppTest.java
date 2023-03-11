@@ -5,7 +5,7 @@ import java.util.List;
 import java.util.Arrays;
 import java.util.ArrayList;
 
-import org.junit.jupiter.api.Assertions;
+import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.Test;
 
 class AppTest {
@@ -19,9 +19,9 @@ class AppTest {
         result.add(1);
         result.add(2);
         result.add(3);
-        List<Integer> actual = App.take(elements, count);
+        List<Integer> listApp = App.take(elements, count);
         Assertions.assertThat(result)
-                .isEqualTo(actual);
+                .isEqualTo(listApp);
         // END
     }
 }
