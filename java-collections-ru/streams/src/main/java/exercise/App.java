@@ -4,13 +4,12 @@ import java.util.List;
 
 // BEGIN
 class App {
-    public static boolean isFree (String freeDomens) {
-        return freeDomens.contains("@gmail.com") || freeDomens.contains("@yandex.ru") || freeDomens.contains("@hotmail.com");
-    }
     public static long getCountOfFreeEmails(List<String> emailsList) {
+        List<String> freeDomens = List.of("gmail.com", "yandex.ru", "hotmail.com");
         long amount = emailsList.stream()
                 .filter(email -> !email.isEmpty())
-                .filter(email -> isFree(email))
+                .map(email -> email.split("@")[0])
+                .filter(email -> freeDomens.contains(email))
                 .count();
         return amount;
     }
