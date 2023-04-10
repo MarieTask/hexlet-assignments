@@ -15,8 +15,9 @@ public class App {
         for (var i = 0; i < symbolsList.size(); i++) {
             if (symbolsList.contains(wordList.get(i))) {
                 symbolsList.remove(wordList.get(i));
+            } else {
+                return false;
             }
-            return false;
         }
         return true;
     }
