@@ -11,6 +11,7 @@ class App {
         return Arrays.stream(strings)
                 .filter(str -> str.startsWith("environment"))
                 .map(str -> str.replaceAll("environment=\"", ""))
+                .map(str -> str.replaceAll("\"", ""))
                 .map(str -> str.split(","))
                 .flatMap(str -> Stream.of(str))
                 .filter(str -> str.startsWith("X_FORWARDED_"))
