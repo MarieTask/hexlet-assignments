@@ -1,7 +1,7 @@
 package exercise;
 
 // BEGIN
-class Segment {
+public class Segment {
     private Point point1;
     private Point point2;
 
