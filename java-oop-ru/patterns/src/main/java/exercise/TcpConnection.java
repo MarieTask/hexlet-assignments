@@ -11,7 +11,7 @@ public class TcpConnection {
 
     private String ip;
     private int port;
-    private Connection connectionState;
+    private Connection connectionState ;
     private List<String> buffer = new ArrayList<>();
 
     public TcpConnection(String ip, int port) {
@@ -21,30 +21,29 @@ public class TcpConnection {
         this.connectionState = new Disconnected(this);
     }
 
-    @Override
     public void setState(Connection connectionState) {
         this.connectionState = connectionState;
     }
 
     //возвращает текущее состояние в виде строки
-    @Override
+
     public String getCurrentState() {
         return this.connectionState.getCurrentState();
     }
 
     //устанавливает новое соединение
-    @Override
+
     public void connect() {
         this.connectionState.connect();
     }
     //разрывает установленное соединение
-    @Override
+
     public void disconnect() {
         this.connectionState.disconnect();
     }
 
     //добавляет текстовые данные в буфер
-    @Override
+
     public void write(String data) {
         if (Objects.equals(this.connectionState.getCurrentState(), "connected")) {
             this.buffer.add(data);
