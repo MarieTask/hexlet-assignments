@@ -47,7 +47,7 @@ public class TcpConnection {
     //добавляет текстовые данные в буфер
     @Override
     public void write(String data) {
-        if (Objects.equals(this.connectionState.getCurrentState(), "connected") {
+        if (Objects.equals(this.connectionState.getCurrentState(), "connected")) {
             this.buffer.add(data);
         } else {
             System.out.println("Error! Cannot writ data. Connection firstly should be established.");
