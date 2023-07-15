@@ -5,10 +5,10 @@ import exercise.TcpConnection;
 // BEGIN
 public class Connected implements Connection {
 
-    private TcpConnection TcpConnection;
+    private TcpConnection tcpConnection;
 
     public Connected(TcpConnection TcpConnection) {
-        this.TcpConnection = TcpConnection;
+        this.tcpConnection = tcpConnection;
     }
 
     @Override
@@ -18,7 +18,7 @@ public class Connected implements Connection {
 
     @Override
     public void disconnect() {
-        this.TcpConnection.setState(new Disconnected(this.TcpConnection));
+        this.tcpConnection.setState(new Disconnected(this.tcpConnection));
         System.out.println("Connection is disconnected.");
     }
 
