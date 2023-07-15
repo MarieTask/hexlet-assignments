@@ -6,7 +6,7 @@ public class Disconnected implements Connection {
 
     private TcpConnection tcpConnection;
 
-    public Disconnected(TcpConnection TcpConnection) {
+    public Disconnected(TcpConnection tcpConnection) {
         this.tcpConnection = tcpConnection;
     }
 

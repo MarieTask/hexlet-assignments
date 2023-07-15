@@ -21,15 +21,15 @@ public class TcpConnection {
         this.connectionState = new Disconnected(this);
     }
 
+    @Override
+    public void setState(Connection connectionState) {
+        this.connectionState = connectionState;
+    }
+
     //возвращает текущее состояние в виде строки
     @Override
     public String getCurrentState() {
         return this.connectionState.getCurrentState();
-    }
-
-    @Override
-    public void setState(Connection connectionState) {
-        this.connectionState = connectionState;
     }
 
     //устанавливает новое соединение
@@ -40,7 +40,7 @@ public class TcpConnection {
     //разрывает установленное соединение
     @Override
     public void disconnect() {
-        this.connectionState.disconnect();connect();
+        this.connectionState.disconnect();
     }
 
     //добавляет текстовые данные в буфер
@@ -52,6 +52,5 @@ public class TcpConnection {
             System.out.println("Error! Cannot writ data. Connection firstly should be established.");
         }
     }
-
 }
 // END

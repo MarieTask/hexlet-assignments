@@ -7,7 +7,7 @@ public class Connected implements Connection {
 
     private TcpConnection tcpConnection;
 
-    public Connected(TcpConnection TcpConnection) {
+    public Connected(TcpConnection tcpConnection) {
         this.tcpConnection = tcpConnection;
     }
 
