@@ -15,9 +15,9 @@ public class PairedTag extends Tag {
     // Список List детей. В этом задании детьми могут быть только одиночные теги.
 
     String body;
-    List<SingleTag> children;
+    List<Tag> children;
 
-    public PairedTag(String name, Map<String, String> attributes, String body, List<SingleTag> children) {
+    public PairedTag(String name, Map<String, String> attributes, String body, List<Tag> children) {
         super(name, attributes);
         this.body = body;
         this.children = children;
