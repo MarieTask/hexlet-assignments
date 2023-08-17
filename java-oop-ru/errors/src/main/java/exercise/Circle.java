@@ -17,7 +17,7 @@ class Circle {
     public double getSquare() throws NegativeRadiusException {
         var square = Math.PI * radius * radius;
         switch (radius) {
-            case 0 -> throw new NegativeRadiusException();
+            case 0 -> throw new NegativeRadiusException("");
             default -> {
                 return square;
             }
