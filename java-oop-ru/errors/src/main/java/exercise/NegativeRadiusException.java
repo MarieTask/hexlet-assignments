@@ -2,7 +2,18 @@ package exercise;
 
 // BEGIN
 class NegativeRadiusException extends Exception {
-    public NegativeRadiusException(String s) {
+
+    private String errorMessage;
+
+    public NegativeRadiusException(String errorMessage) {
+        this.errorMessage = errorMessage;
     }
+
+    public String getErrorMessage() {
+        return errorMessage;
+    }
+
+    public static final NegativeRadiusException INVALID_RADIUS = new NegativeRadiusException("Не удалось посчитать площадь");
+
 }
 // END
