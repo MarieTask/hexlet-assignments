@@ -29,7 +29,7 @@ public final class App {
                                     .findFirst()
                                             .orElse(null);
             if (result == null) {
-                throw new NotFoundResponse();
+                throw new NotFoundResponse("Company not found");
             }
             ctx.json(result);
         });
