@@ -22,12 +22,13 @@ public final class App {
 
         // BEGIN
         app.get("/companies/{id}", ctx -> {
-            var id = ctx.pathParamAsClass("id", Integer.class);
+            var id = ctx.pathParam("id");
 
             Map<String, String> result = COMPANIES.stream()
                             .filter(x -> x.get("id").equals(id))
-                                    .findFirst()
-                                            .orElse(null);
+                    .findFirst()
+                    .orElse(null);
+
             if (result == null) {
                 throw new NotFoundResponse("Company not found");
             }
