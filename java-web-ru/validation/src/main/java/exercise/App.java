@@ -46,13 +46,13 @@ public final class App {
 
             try {
                 title = ctx.formParamAsClass("title", String.class)
-                        .check(value -> value.length() > 1, "Название статьи должно быть не короче 2 символов")
+                        .check(value -> value.length() >= 2, "Название не должно быть короче двух символов")
                         .check(not(ArticleRepository::existsByTitle)::test,
                                 "Статья с таким названием уже существует")
                         .get();
                 content = ctx.formParamAsClass("content", String.class)
-                        .check(Objects::nonNull, "Содержимое статьи должно быть не короче 10 символов")
-                        .check(value -> value.length() > 9, "Содержимое статьи должно быть не короче 10 символов")
+                        .check(Objects::nonNull, "Статья должна быть не короче 10 символов")
+                        .check(value -> value.length() >= 10, "Статья должна быть не короче 10 символов")
                         .get();
                 var article = new Article(title, content);
                 ArticleRepository.save(article);
