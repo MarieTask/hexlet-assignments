@@ -3,6 +3,16 @@
 
 @template.layout.page(
 content = @`
+    @if(page.getErrors() != null)
+        <ul xmlns="http://www.w3.org/1999/html">
+            @for(var validator : page.getErrors().values())
+                @for(var error : validator)
+                    <li>${error.getMessage()}</li>
+                @endfor
+            @endfor
+        </ul>
+    @endif
+
     <form action="/articles" method="post">
         <div>
             <label>
@@ -16,14 +26,7 @@ content = @`
                 <textarea name="content" required>${page.getContent()}</textarea>
             </label>
         </div>
-        <input type="submit" value="Download article" />
-        @if(!page.getErrors().isEmpty())
-            <ul>
-                @for(var error : page.getErrors())
-                    <li>${error}</li>
-                @endfor
-            </ul>
-        @endif
+        <input type="submit" value="Add article" />
     </form>
 `
 )

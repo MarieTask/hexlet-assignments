@@ -2,8 +2,6 @@ package exercise;
 
 import io.javalin.Javalin;
 import io.javalin.validation.ValidationException;
-
-import java.util.ArrayList;
 import java.util.List;
 import exercise.model.Article;
 import exercise.dto.articles.ArticlesPage;
@@ -34,26 +32,22 @@ public final class App {
 
         // BEGIN
         app.post("/articles", ctx -> {
-            var title = ctx.formParamAsClass("title", String.class).getOrDefault("");
-            var content = ctx.formParamAsClass("content", String.class).getOrDefault("");
-            var errors = new ArrayList<String>();
+            var title = "";
+            var content = "";
 
-            if (title.length() < 2) {
-                errors.add("Название не должно быть короче двух символов");
-            }
-            if (content.length() < 10) {
-                errors.add("Содержимое статьи должно быть не короче 10 символов");
-            }
-            if (ArticleRepository.existsByTitle(title)) {
-                errors.add("Статья с таким названием уже существует");
-            }
-
-            if (errors.isEmpty()) {
+            try {
+                title = ctx.formParamAsClass("title", String.class)
+                        .check(value -> value.length() > 1, "Название статьи должно быть не короче 2 символов")
+                        .check(value -> !ArticleRepository.existsByTitle(value), "Статья с таким названием уже существует")
+                        .get();
+                content = ctx.formParamAsClass("content", String.class)
+                        .check(value -> value.length() > 9, "Содержимое статьи должно быть не короче 10 символов")
+                        .get();
                 var article = new Article(title, content);
                 ArticleRepository.save(article);
                 ctx.redirect("/articles");
-            } else {
-                var page = new BuildArticlePage(title, content, errors);
+            } catch (ValidationException e) {
+                var page = new BuildArticlePage(title, content, e.getErrors());
                 ctx.status(422);
                 ctx.render("articles/build.jte", model("page", page));
             }
