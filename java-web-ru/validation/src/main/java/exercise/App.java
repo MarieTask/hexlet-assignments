@@ -3,13 +3,18 @@ package exercise;
 import io.javalin.Javalin;
 import io.javalin.validation.ValidationException;
 import java.util.List;
+import java.util.Objects;
+
 import exercise.model.Article;
 import exercise.dto.articles.ArticlesPage;
 import exercise.dto.articles.BuildArticlePage;
 import static io.javalin.rendering.template.TemplateUtil.model;
+import static java.util.function.Predicate.not;
+
 import io.javalin.rendering.template.JavalinJte;
 
 import exercise.repository.ArticleRepository;
+import org.eclipse.jetty.http.HttpStatus;
 
 public final class App {
 
@@ -31,16 +36,22 @@ public final class App {
         });
 
         // BEGIN
+        app.get("/articles/build", ctx -> {
+            ctx.render("articles/build.jte", model("page", new BuildArticlePage()));
+        });
+
         app.post("/articles", ctx -> {
-            var title = "";
-            var content = "";
+            String title = ctx.formParam("title");
+            String content = ctx.formParam("content");
 
             try {
                 title = ctx.formParamAsClass("title", String.class)
                         .check(value -> value.length() > 1, "Название статьи должно быть не короче 2 символов")
-                        .check(value -> !ArticleRepository.existsByTitle(value), "Статья с таким названием уже существует")
+                        .check(not(ArticleRepository::existsByTitle)::test,
+                                "Статья с таким названием уже существует")
                         .get();
                 content = ctx.formParamAsClass("content", String.class)
+                        .check(Objects::nonNull, "Содержимое статьи должно быть не короче 10 символов")
                         .check(value -> value.length() > 9, "Содержимое статьи должно быть не короче 10 символов")
                         .get();
                 var article = new Article(title, content);
@@ -48,14 +59,9 @@ public final class App {
                 ctx.redirect("/articles");
             } catch (ValidationException e) {
                 var page = new BuildArticlePage(title, content, e.getErrors());
-                ctx.status(422);
+                ctx.status(HttpStatus.UNPROCESSABLE_ENTITY_422);
                 ctx.render("articles/build.jte", model("page", page));
             }
-        });
-
-        app.get("/articles/build", ctx -> {
-            var article = new BuildArticlePage();
-            ctx.render("articles/build.jte", model("article", article));
         });
         // END
 

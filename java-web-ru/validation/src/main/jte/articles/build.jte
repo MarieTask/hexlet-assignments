@@ -1,8 +1,6 @@
 @import exercise.dto.articles.BuildArticlePage
 @param BuildArticlePage page
 
-@template.layout.page(
-content = @`
     @if(page.getErrors() != null)
         <ul xmlns="http://www.w3.org/1999/html">
             @for(var validator : page.getErrors().values())
@@ -23,10 +21,8 @@ content = @`
         <div>
             <label>
                 Content
-                <textarea name="content" required>${page.getContent()}</textarea>
+                <textarea name="content" value="${page.getContent()}"></textarea>
             </label>
         </div>
         <input type="submit" value="Add article" />
     </form>
-`
-)

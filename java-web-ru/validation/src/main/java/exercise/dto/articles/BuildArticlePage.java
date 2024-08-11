@@ -1,9 +1,7 @@
 package exercise.dto.articles;
 
-import exercise.repository.ArticleRepository;
 import io.javalin.validation.ValidationError;
 
-import java.util.ArrayList;
 import java.util.Map;
 import java.util.List;
 
